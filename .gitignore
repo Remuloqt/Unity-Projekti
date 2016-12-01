@@ -1,4 +1,5 @@
 Temp/
 obj/
-Builds/NetworkBuild/*
+Builds/*
+!Builds/NetworkBuild/
 Library/
