@@ -5,11 +5,13 @@ public class PlayerController : NetworkBehaviour
 {
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
+    public Camera camera;
 
     void Update()
     {
         if (!isLocalPlayer)
         {
+            camera.enabled = false;
             return;
         }
 
@@ -37,7 +39,7 @@ public class PlayerController : NetworkBehaviour
             bulletSpawn.rotation);
 
         // Add velocity to the bullet
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 10;
 
         // Spawn the bullet on the Clients
         NetworkServer.Spawn(bullet);
