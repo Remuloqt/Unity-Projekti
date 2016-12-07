@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Billboard.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\CarPlayerController.cs" />
+     <Compile Include="Assets\Scripts\EndingScreenScript.cs" />
      <Compile Include="Assets\Scripts\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\EnemySpawner.cs" />
      <Compile Include="Assets\Scripts\EnemyTarget.cs" />
