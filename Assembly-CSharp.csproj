@@ -49,7 +49,6 @@
      <Compile Include="Assets\Scripts\Billboard.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\CarPlayerController.cs" />
-     <Compile Include="Assets\Scripts\EndingScreenScript.cs" />
      <Compile Include="Assets\Scripts\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\EnemySpawner.cs" />
      <Compile Include="Assets\Scripts\EnemyTarget.cs" />
@@ -58,7 +57,7 @@
      <Compile Include="Assets\Scripts\ModelViewCameraController.cs" />
      <Compile Include="Assets\Scripts\PlayerCameraScript.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\StartingScreenScript.cs" />
+     <Compile Include="Assets\Scripts\StartAndEndScreenManagerScript.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
@@ -167,6 +166,9 @@
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Drawing">
+ <HintPath>C:/Repo/t4rasa00/Unity-Projekti/Assets/Canvases/System.Drawing.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
