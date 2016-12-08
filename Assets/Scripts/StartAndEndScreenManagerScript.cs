@@ -44,10 +44,8 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
         startingMenu.SetActive(true);
     }
 
-    public void OnButtonConnectClick()
+    private void StartClienting()
     {
-        HideStartingMenu();
-
         playerIsHost = false;
 
         NetworkManager networkManager = GetComponent<NetworkManager>();
@@ -57,10 +55,14 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
         networkManager.StartClient();
     }
 
-    public void OnButtonCreateClick()
+    public void OnButtonConnectClick()
     {
         HideStartingMenu();
+        StartClienting();
+    }
 
+    private void StartHosting()
+    {
         playerIsHost = true;
 
         NetworkManager networkManager = GetComponent<NetworkManager>();
@@ -68,6 +70,12 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
         networkManager.networkAddress = inputFieldServerIP.text;
         networkManager.networkPort = int.Parse(inputFieldServerPort.text);
         networkManager.StartHost();
+    }
+
+    public void OnButtonCreateClick()
+    {
+        HideStartingMenu();
+        StartHosting();
     }
 
 
@@ -95,12 +103,14 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
     {
         DisconnectGame();
         HideEndingMenu();
+        ShowStartingMenu();
     }
 
     public void OnButtonNewGameClick()
     {
         DisconnectGame();
         HideEndingMenu();
+        StartClienting();
     }
 
     private void HideEndingMenu()

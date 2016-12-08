@@ -213,7 +213,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="System.Drawing">
- <HintPath>C:/Repo/t4rasa00/Unity-Projekti/Assets/Canvases/System.Drawing.dll</HintPath>
+ <HintPath>C:/Repo/t4rasa00/Unity-Projekti/Assets/Menus/EndingMenu/System.Drawing.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
