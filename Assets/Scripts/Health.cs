@@ -24,6 +24,30 @@ public class Health : NetworkBehaviour
         }
     }
 
+    [ClientRpc]
+    void RpcDestroyOnDeath(GameObject objectToDestroy)
+    {
+        Destroy(objectToDestroy);
+
+        if (isLocalPlayer)
+        {
+            GameObject startAndEndScreenManager = GameObject.Find("StartAndEndScreenManager");
+            var startAndEndScreenManagerScript = startAndEndScreenManager.GetComponent<StartAndEndScreenManagerScript>();
+            startAndEndScreenManagerScript.EndGame();
+        }
+    }
+
+    public void AddHealth(int amount)
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
+        currentHealth += amount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+    }
+
     public void TakeDamage(int amount)
     {
         if (!isServer)
@@ -34,7 +58,7 @@ public class Health : NetworkBehaviour
         {
             if (destroyOnDeath)
             {
-                Destroy(gameObject);
+                RpcDestroyOnDeath(gameObject);
             }
             else
             {
