@@ -50,6 +50,7 @@
      <Compile Include="Assets\Menus\EndingMenu\Background.cs" />
      <Compile Include="Assets\Scripts\Billboard.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
+     <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\CarPlayerController.cs" />
      <Compile Include="Assets\Scripts\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\EnemySpawner.cs" />
@@ -61,6 +62,7 @@
      <Compile Include="Assets\Scripts\PickupSpawner.cs" />
      <Compile Include="Assets\Scripts\PlayerCameraScript.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\SphericalCoordinates.cs" />
      <Compile Include="Assets\Scripts\StartAndEndScreenManagerScript.cs" />
      <Compile Include="Assets\Scripts\TeleportationSphere.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
@@ -178,7 +180,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="System.Drawing">
- <HintPath>C:/Repo/t4rasa00/Unity-Projekti/Assets/Menus/EndingMenu/System.Drawing.dll</HintPath>
+ <HintPath>C:/Users/Kettunen/Documents/Unity Projects/Unity-Projekti/Assets/Menus/EndingMenu/System.Drawing.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
