@@ -37,6 +37,17 @@ public class Health : NetworkBehaviour
         }
     }
 
+    public void AddHealth(int amount)
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
+        currentHealth += amount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+    }
+
     public void TakeDamage(int amount)
     {
         if (!isServer)
