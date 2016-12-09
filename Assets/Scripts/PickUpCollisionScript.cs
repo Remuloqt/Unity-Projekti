@@ -1,19 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System.Collections;
+
 
 public class PickUpCollisionScript : NetworkBehaviour {
 
     public int healthAddition = 10;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Use this for initialization
+    void Start () {
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -29,7 +31,10 @@ public class PickUpCollisionScript : NetworkBehaviour {
             var healthScript = carPlayerObject.GetComponent<Health>();
             healthScript.AddHealth(healthAddition);
 
+            ScoreManager.score++;
+
             NetworkServer.Destroy(this.gameObject);
+
         }
     }
 }
