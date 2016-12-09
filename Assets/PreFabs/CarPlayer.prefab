@@ -581,7 +581,6 @@ GameObject:
   - component: {fileID: 223858102796069966}
   - component: {fileID: 114914730777375686}
   - component: {fileID: 114900182102021448}
-  - component: {fileID: 114685575242357832}
   m_Layer: 5
   m_Name: Player Data Canvas
   m_TagString: Untagged
@@ -2287,17 +2286,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carController: {fileID: 114802540048859348}
---- !u!114 &114685575242357832
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1897332900210136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 316c9b7018a8615459480203c8ad2211, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114698620290763908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2309,7 +2297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61e08c2fc1f49e40a7ba4d3cc779e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
 --- !u!114 &114792617309184202
 MonoBehaviour:
   m_ObjectHideFlags: 1

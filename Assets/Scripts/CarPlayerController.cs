@@ -9,19 +9,30 @@ namespace UnityStandardAssets.Vehicles.Car
     [RequireComponent(typeof(CarController))]
     public class CarPlayerController : NetworkBehaviour
     {
-
-        public Camera camera;
-
+        private GameObject cameraObject;
         private CarController m_Car; // the car controller we want to use
 
         // Use this for initialization
         void Start()
         {
+            if (!isLocalPlayer) return;
+
             m_Car = GetComponent<CarController>();
-            Camera mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
-            CameraController cameraControllerScript = mainCamera.GetComponent<CameraController>();
-            mainCamera.transform.position = this.transform.Find("CameraPosition").transform.position;
-            cameraControllerScript.pivot = this.transform;
+
+            GameObject playerCarObject = this.gameObject;
+            playerCarObject.AddComponent<CameraController>();
+
+            // create camera object which contains the camera and the cameracontroller script
+            // lastly attach it to the player object
+            cameraObject = new GameObject("PlayerCamera");
+            cameraObject.transform.parent = this.gameObject.transform;
+            cameraObject.AddComponent<Camera>();
+            cameraObject.AddComponent<CameraController>();
+
+            CameraController cameraControllerScript = cameraObject.GetComponent<CameraController>();
+            cameraControllerScript.camera = cameraObject.GetComponent<Camera>();
+            cameraControllerScript.pivot = playerCarObject.transform;
+
         }
 
         // Update is called once per frame
@@ -29,7 +40,6 @@ namespace UnityStandardAssets.Vehicles.Car
         {
             if (!isLocalPlayer)
             {
-                camera.enabled = false;
                 return;
             }
             // pass the input to the car!
