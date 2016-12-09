@@ -1,7 +1,5 @@
 Temp/
-
-Library/*
-!Library/
+Library/
 
 Builds/Web/*
 Builds/Desktop/*
