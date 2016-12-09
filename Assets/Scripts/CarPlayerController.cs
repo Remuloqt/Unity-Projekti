@@ -18,6 +18,10 @@ namespace UnityStandardAssets.Vehicles.Car
         void Start()
         {
             m_Car = GetComponent<CarController>();
+            Camera mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
+            CameraController cameraControllerScript = mainCamera.GetComponent<CameraController>();
+            mainCamera.transform.position = this.transform.Find("CameraPosition").transform.position;
+            cameraControllerScript.pivot = this.transform;
         }
 
         // Update is called once per frame

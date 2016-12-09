@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CameraController : MonoBehaviour 
 {	
@@ -11,7 +12,8 @@ public class CameraController : MonoBehaviour
 	{
 		sc = new SphericalCoordinates( transform.position, 3f, 10f, 0f, Mathf.PI*2f, 0f, Mathf.PI / 2f );
 		// Initialize position
-		transform.position = sc.toCartesian + pivot.position;
+        if (pivot == null) return;
+        transform.position = sc.toCartesian + pivot.position;
 	}
 
 	void Update () 
@@ -21,12 +23,13 @@ public class CameraController : MonoBehaviour
 		h = Input.GetAxis( "Mouse X" );
 		v = Input.GetAxis( "Mouse Y" );
 
-		transform.position = sc.Rotate( -h * rotateSpeed * Time.deltaTime, -v * rotateSpeed * Time.deltaTime ).toCartesian + pivot.position;
+        if (pivot == null) return;
+        transform.position = sc.Rotate(-h * rotateSpeed * Time.deltaTime, -v * rotateSpeed * Time.deltaTime).toCartesian + pivot.position;
 
-		float sw = -Input.GetAxis("Mouse ScrollWheel");
-		if( sw*sw > Mathf.Epsilon )
-			transform.position = sc.TranslateRadius( sw * Time.deltaTime * scrollSpeed ).toCartesian + pivot.position;
+        float sw = -Input.GetAxis("Mouse ScrollWheel");
+        if (sw * sw > Mathf.Epsilon)
+            transform.position = sc.TranslateRadius(sw * Time.deltaTime * scrollSpeed).toCartesian + pivot.position;
 
-		transform.LookAt( pivot.position + cameraAssign);
+        transform.LookAt(pivot.position + cameraAssign);
 	}
 }
