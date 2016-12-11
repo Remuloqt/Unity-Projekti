@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedBoostSphereScript : MonoBehaviour {
+public class SpeedBoostScript : MonoBehaviour {
+
+    public float speedBoost = 10.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -20,8 +22,6 @@ public class SpeedBoostSphereScript : MonoBehaviour {
         GameObject collidersObject = collider.transform.parent.gameObject;
         GameObject carObject = collidersObject.transform.parent.gameObject;
 
-        Vector3 tempVelocity = carObject.GetComponent<Rigidbody>().velocity;
-        tempVelocity.z *= 1.7f;
-        carObject.GetComponent<Rigidbody>().velocity = tempVelocity;
+        carObject.GetComponent<Rigidbody>().AddForce(transform.forward * -(speedBoost * 10), ForceMode.Acceleration);
     }
 }
