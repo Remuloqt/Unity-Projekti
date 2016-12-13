@@ -12,6 +12,8 @@ namespace UnityStandardAssets.Vehicles.Car
         private GameObject cameraObject;
         private CarController m_Car; // the car controller we want to use
 
+        public float cameraSpeed = 1f;
+
         private GameObject playerSpawnPointsMainObject;
         private List<Transform> playerSpawnPoints;
         private Transform[] playerSpawnPointArray;
@@ -43,9 +45,13 @@ namespace UnityStandardAssets.Vehicles.Car
             cameraObject.AddComponent<Camera>();
             cameraObject.AddComponent<CameraController>();
 
+            // Add an audio listener to the camera
+            cameraObject.AddComponent<AudioListener>();
+
             CameraController cameraControllerScript = cameraObject.GetComponent<CameraController>();
             cameraControllerScript.camera = cameraObject.GetComponent<Camera>();
             cameraControllerScript.pivot = playerCarObject.transform;
+            cameraControllerScript.rotateSpeed = cameraSpeed;
 
             playerCarObject.transform.position = playerSpawnPointArray[Random.Range(0, playerSpawnPointArray.Length)].position;
 

@@ -10,11 +10,12 @@ public class EnemyTarget : NetworkBehaviour {
     private Transform myTransform;
     private Transform targetTransform;
     private LayerMask raycastLayer;
-    private float radius = 100;
 
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public float cooldown = 100.0f;
+    public float radius = 100f;
+    public float bulletSpeed = 50f;
 
 	// Use this for initialization
 	void Start () {
@@ -70,7 +71,9 @@ public class EnemyTarget : NetworkBehaviour {
         if (targetTransform != null && isServer && bulletPrefab != null && bulletSpawn != null)
         {
             var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 35;
+            Vector3 shootingVector = (targetTransform.position - bullet.transform.position).normalized;
+            //bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 35;
+            bullet.GetComponent<Rigidbody>().velocity = (shootingVector * bulletSpeed);
             NetworkServer.Spawn(bullet);
             Destroy(bullet, 2.0f);
         }
