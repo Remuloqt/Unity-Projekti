@@ -41,6 +41,7 @@ namespace UnityStandardAssets.Vehicles.Car
             // create camera object which contains the camera and the cameracontroller script
             // lastly attach it to the player object
             cameraObject = new GameObject("PlayerCamera");
+
             cameraObject.transform.parent = this.gameObject.transform;
             cameraObject.AddComponent<Camera>();
             cameraObject.AddComponent<CameraController>();
@@ -53,7 +54,13 @@ namespace UnityStandardAssets.Vehicles.Car
             cameraControllerScript.pivot = playerCarObject.transform;
             cameraControllerScript.rotateSpeed = cameraSpeed;
 
-            playerCarObject.transform.position = playerSpawnPointArray[Random.Range(0, playerSpawnPointArray.Length)].position;
+            int randomArrayIndex = Random.Range(0, playerSpawnPointArray.Length);
+            playerCarObject.transform.position = playerSpawnPointArray[randomArrayIndex].position;
+            playerCarObject.transform.rotation = playerSpawnPointArray[randomArrayIndex].rotation;
+            cameraControllerScript.camera.transform.rotation = playerCarObject.transform.rotation;
+
+            // Remove the audio listener from this object because there already is one in the StartAndEndScreenManager
+            Destroy(cameraObject.GetComponent<AudioListener>());
 
         }
 

@@ -20,6 +20,8 @@ public class TeleportationSphere : MonoBehaviour {
     {
         GameObject teleportationDestination = transform.parent.Find("TeleportationDestination").gameObject;
 
+        if (collider.transform.parent.gameObject == null) return;
+
         GameObject collidersObject = collider.transform.parent.gameObject;
         GameObject carObject = collidersObject.transform.parent.gameObject;
 
