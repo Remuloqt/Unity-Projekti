@@ -13,11 +13,22 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
     public GameObject startingMenu;
     public GameObject endingMenu;
 
+    public AudioClip startingMenuMusic;
+    public AudioClip gameMusic;
+    public AudioClip endingVictoryMusic;
+    public AudioClip endingLoserMusic;
+
+    private AudioSource audioSource;
+
     private bool playerIsHost = false;
+
+    public bool gameWon = false;
 
 	// Use this for initialization
 	void Start () {
+        audioSource = GetComponent<AudioSource>();
 
+        ShowStartingMenu();
 	}
 	
 	// Update is called once per frame
@@ -37,11 +48,14 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
     private void HideStartingMenu()
     {
         startingMenu.SetActive(false);
+        audioSource.Stop();
     }
 
     private void ShowStartingMenu()
     {
         startingMenu.SetActive(true);
+        audioSource.clip = startingMenuMusic;
+        audioSource.Play();
     }
 
     private void StartClienting()
@@ -53,6 +67,8 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
         networkManager.networkAddress = inputFieldServerIP.text;
         networkManager.networkPort = int.Parse(inputFieldServerPort.text);
         networkManager.StartClient();
+
+        StartGameMusic();
     }
 
     public void OnButtonConnectClick()
@@ -70,6 +86,8 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
         networkManager.networkAddress = inputFieldServerIP.text;
         networkManager.networkPort = int.Parse(inputFieldServerPort.text);
         networkManager.StartHost();
+
+        StartGameMusic();
     }
 
     public void OnButtonCreateClick()
@@ -78,6 +96,16 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
         StartHosting();
     }
 
+    private void StartGameMusic()
+    {
+        audioSource.clip = gameMusic;
+        audioSource.Play();
+    }
+
+    private void StopGameMusic()
+    {
+        audioSource.Stop();
+    }
 
     private void DisconnectGame()
     {
@@ -91,6 +119,8 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
             NetworkManager networkManager = GetComponent<NetworkManager>();
             networkManager.StopHost();
         }
+
+        StopGameMusic();
     }
 
     public void EndGame()
@@ -116,11 +146,14 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
     private void HideEndingMenu()
     {
         endingMenu.SetActive(false);
+        audioSource.Stop();
     }
 
     private void ShowEndingMenu()
     {
         endingMenu.SetActive(true);
+        audioSource.clip = gameWon ? endingVictoryMusic : endingLoserMusic;
+        audioSource.Play();
     }
 
 }

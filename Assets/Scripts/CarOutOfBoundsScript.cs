@@ -9,6 +9,8 @@ public class CarOutOfBoundsScript : MonoBehaviour {
     private int outOfBoundsMaxHealth = 100;
     public int outOfBoundsDamage = 10;
 
+    public bool enabled = true;
+
     private GameObject playerSpawnPointsMainObject;
     private List<Transform> playerSpawnPoints;
     private Transform[] playerSpawnPointArray;
@@ -36,7 +38,9 @@ public class CarOutOfBoundsScript : MonoBehaviour {
 
     public void OnPlayerGroundHit()
     {
+        if (!enabled) return;
         Debug.Log("Player hit the ground with outOfBoundsHealth: " + outOfBoundsHealth);
+
         if (outOfBoundsCooldown > 0) outOfBoundsCooldown--;
         else
         {
