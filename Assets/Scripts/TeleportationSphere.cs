@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TeleportationSphere : MonoBehaviour {
 
+    public float direction = 1;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -16,7 +18,7 @@ public class TeleportationSphere : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
-        GameObject teleportationDestination = GameObject.Find("TeleportationDestination");
+        GameObject teleportationDestination = transform.parent.Find("TeleportationDestination").gameObject;
 
         GameObject collidersObject = collider.transform.parent.gameObject;
         GameObject carObject = collidersObject.transform.parent.gameObject;
@@ -25,6 +27,6 @@ public class TeleportationSphere : MonoBehaviour {
 
         carObject.transform.position = teleportationDestination.transform.position;
         carObject.transform.rotation = teleportationDestination.transform.rotation;
-        carObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, tempVelocity.z);
+        carObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, direction * tempVelocity.z);
     }
 }

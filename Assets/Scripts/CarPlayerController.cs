@@ -12,10 +12,24 @@ namespace UnityStandardAssets.Vehicles.Car
         private GameObject cameraObject;
         private CarController m_Car; // the car controller we want to use
 
+        private GameObject playerSpawnPointsMainObject;
+        private List<Transform> playerSpawnPoints;
+        private Transform[] playerSpawnPointArray;
+
         // Use this for initialization
         void Start()
         {
             if (!isLocalPlayer) return;
+
+            playerSpawnPointsMainObject = GameObject.Find("PlayerSpawnPoints");
+            playerSpawnPoints = new List<Transform>();
+
+            foreach (Transform child in playerSpawnPointsMainObject.transform)
+            {
+                playerSpawnPoints.Add(child);
+            }
+
+            playerSpawnPointArray = playerSpawnPoints.ToArray();
 
             m_Car = GetComponent<CarController>();
 
@@ -32,6 +46,8 @@ namespace UnityStandardAssets.Vehicles.Car
             CameraController cameraControllerScript = cameraObject.GetComponent<CameraController>();
             cameraControllerScript.camera = cameraObject.GetComponent<Camera>();
             cameraControllerScript.pivot = playerCarObject.transform;
+
+            playerCarObject.transform.position = playerSpawnPointArray[Random.Range(0, playerSpawnPointArray.Length)].position;
 
         }
 
