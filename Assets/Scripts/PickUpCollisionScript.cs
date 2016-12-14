@@ -6,12 +6,10 @@ using System.Collections;
 
 public class PickUpCollisionScript : NetworkBehaviour {
 
-    public int healthAddition = 10;
-
+    public int scoreAddition = 10;
 
     // Use this for initialization
     void Start () {
-
     }
 
     // Update is called once per frame
@@ -28,10 +26,10 @@ public class PickUpCollisionScript : NetworkBehaviour {
             var colliderObject = other.gameObject;
             var collidersObject = colliderObject.transform.parent.gameObject;
             var carPlayerObject = collidersObject.transform.parent.gameObject;
-            var healthScript = carPlayerObject.GetComponent<Health>();
-            healthScript.AddHealth(healthAddition);
 
-            ScoreManager.score++;
+            CarPlayerData playerScoreScript = carPlayerObject.GetComponent<CarPlayerData>();
+
+            playerScoreScript.OnPickupPickedUp(scoreAddition);
 
             NetworkServer.Destroy(this.gameObject);
 

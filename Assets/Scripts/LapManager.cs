@@ -6,10 +6,11 @@ using UnityEngine.Networking;
 public class LapManager : NetworkBehaviour {
 
     // Possible way to implement giving player points for completing a lap
-    //private PlayerScore playerScoreScript;
+    private CarPlayerData playerScoreScript;
 
     private bool newLap = false;
     public int lapsFinished = 0;
+    public int lapScoreAmount = 20;
 
     private TextMesh lapTextNumber;
 
@@ -20,7 +21,7 @@ public class LapManager : NetworkBehaviour {
 
         // Possible way to get the playerScoreScript for the rest of the code
         GameObject carPlayerObject = this.gameObject;
-        //playerScoreScript = carPlayerObject.GetComponent<PlayerScoreScript>();
+        playerScoreScript = carPlayerObject.GetComponent<CarPlayerData>();
 
         GameObject mapObject = GameObject.Find("GameMap");
         GameObject lapStuffObject = mapObject.transform.Find("LapStuff").gameObject;
@@ -52,7 +53,7 @@ public class LapManager : NetworkBehaviour {
 
         newLap = false;
         // Possible way to inform of new lap done
-        //playerScoreScript.OnLapFinished();
+        playerScoreScript.OnLapFinished(lapScoreAmount);
 
         ++lapsFinished;
         lapTextNumber.text = "" + lapsFinished;

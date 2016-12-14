@@ -11,10 +11,12 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
     public InputField inputfieldPlayerName;
     private string serverIP;
     private int serverPort;
-    private string playerName;
+
+    public string playerName;
 
     public GameObject startingMenu;
     public GameObject endingMenu;
+    public Text endingMenuScoreText;
 
     public AudioClip startingMenuMusic;
     public AudioClip gameMusic;
@@ -24,8 +26,6 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
     private AudioSource audioSource;
 
     private bool playerIsHost = false;
-
-    public bool gameWon = false;
 
 	// Use this for initialization
 	void Start () {
@@ -152,10 +152,10 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
         StopGameMusic();
     }
 
-    public void EndGame()
+    public void EndGame(CarPlayerData data)
     {
         DisconnectGame();
-        ShowEndingMenu();
+        ShowEndingMenu(data);
     }
 
     public void OnButtonMainMenuClick()
@@ -178,10 +178,13 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
         audioSource.Stop();
     }
 
-    private void ShowEndingMenu()
+    private void ShowEndingMenu(CarPlayerData data)
     {
         endingMenu.SetActive(true);
-        audioSource.clip = gameWon ? endingVictoryMusic : endingLoserMusic;
+
+        endingMenuScoreText.text = "" + data.playerScore;
+
+        audioSource.clip = data.gameWon ? endingVictoryMusic : endingLoserMusic;
         audioSource.Play();
     }
 

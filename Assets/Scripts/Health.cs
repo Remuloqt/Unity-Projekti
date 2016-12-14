@@ -33,7 +33,9 @@ public class Health : NetworkBehaviour
         {
             GameObject startAndEndScreenManager = GameObject.Find("StartAndEndScreenManager");
             var startAndEndScreenManagerScript = startAndEndScreenManager.GetComponent<StartAndEndScreenManagerScript>();
-            startAndEndScreenManagerScript.EndGame();
+            GameObject playerCarObject = transform.gameObject;
+            CarPlayerData carPlayerData = playerCarObject.GetComponent<CarPlayerData>();
+            startAndEndScreenManagerScript.EndGame(carPlayerData);
         }
     }
 
