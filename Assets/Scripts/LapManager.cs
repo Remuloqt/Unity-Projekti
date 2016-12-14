@@ -53,6 +53,7 @@ public class LapManager : NetworkBehaviour {
         newLap = false;
         // Possible way to inform of new lap done
         //playerScoreScript.OnLapFinished();
+
         ++lapsFinished;
         lapTextNumber.text = "" + lapsFinished;
     }

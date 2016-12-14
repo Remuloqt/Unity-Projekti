@@ -25,8 +25,14 @@ public class TeleportationSphere : MonoBehaviour {
         GameObject collidersObject = collider.transform.parent.gameObject;
         GameObject carObject = collidersObject.transform.parent.gameObject;
 
+        Vector3 tempVelocity = carObject.GetComponent<Rigidbody>().velocity;
+
         carObject.transform.position = teleportationDestination.transform.position;
         carObject.transform.rotation = teleportationDestination.transform.rotation;
-        carObject.GetComponent<Rigidbody>().velocity = teleportationDestination.transform.forward * direction;
+
+        if (tempVelocity.z < teleportationDestination.transform.forward.z) tempVelocity.z *= -1;
+
+        Vector3 vectorToGoFromDestination = new Vector3(teleportationDestination.transform.forward.x, teleportationDestination.transform.forward.y, teleportationDestination.transform.forward.z + tempVelocity.z);
+        carObject.GetComponent<Rigidbody>().velocity = vectorToGoFromDestination;
     }
 }
