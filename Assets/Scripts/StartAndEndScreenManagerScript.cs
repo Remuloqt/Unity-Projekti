@@ -9,6 +9,9 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
     public InputField inputFieldServerIP;
     public InputField inputFieldServerPort;
     public InputField inputfieldPlayerName;
+    private string serverIP;
+    private int serverPort;
+    private string playerName;
 
     public GameObject startingMenu;
     public GameObject endingMenu;
@@ -58,14 +61,39 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
         audioSource.Play();
     }
 
+    private bool CheckUIDataValidity()
+    {
+        bool allGood = false;
+        try
+        {
+            serverIP = inputFieldServerIP.text;
+
+            bool serverPortResult = false;
+            serverPortResult = int.TryParse(inputFieldServerPort.text, out serverPort);
+            playerName = inputfieldPlayerName.text;
+            allGood = serverPortResult;
+        }
+        catch
+        {
+            allGood = false;
+        }
+        return allGood;
+    }
+
+    private NetworkManager CreateNetworkManagerFromUIData()
+    {
+        NetworkManager networkManager = GetComponent<NetworkManager>();
+        networkManager.serverBindAddress = serverIP;
+        networkManager.networkAddress = serverIP;
+        networkManager.networkPort = serverPort;
+        return networkManager;
+    }
+
     private void StartClienting()
     {
         playerIsHost = false;
 
-        NetworkManager networkManager = GetComponent<NetworkManager>();
-        networkManager.serverBindAddress = inputFieldServerIP.text;
-        networkManager.networkAddress = inputFieldServerIP.text;
-        networkManager.networkPort = int.Parse(inputFieldServerPort.text);
+        NetworkManager networkManager = CreateNetworkManagerFromUIData();
         networkManager.StartClient();
 
         StartGameMusic();
@@ -73,6 +101,8 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
 
     public void OnButtonConnectClick()
     {
+        if (CheckUIDataValidity() == false) return;
+
         HideStartingMenu();
         StartClienting();
     }
@@ -81,10 +111,7 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
     {
         playerIsHost = true;
 
-        NetworkManager networkManager = GetComponent<NetworkManager>();
-        networkManager.serverBindAddress = inputFieldServerIP.text;
-        networkManager.networkAddress = inputFieldServerIP.text;
-        networkManager.networkPort = int.Parse(inputFieldServerPort.text);
+        NetworkManager networkManager = CreateNetworkManagerFromUIData();
         networkManager.StartHost();
 
         StartGameMusic();
@@ -92,6 +119,8 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
 
     public void OnButtonCreateClick()
     {
+        if (CheckUIDataValidity() == false) return;
+
         HideStartingMenu();
         StartHosting();
     }
