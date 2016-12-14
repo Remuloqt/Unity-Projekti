@@ -25,10 +25,8 @@ public class TeleportationSphere : MonoBehaviour {
         GameObject collidersObject = collider.transform.parent.gameObject;
         GameObject carObject = collidersObject.transform.parent.gameObject;
 
-        Vector3 tempVelocity = carObject.GetComponent<Rigidbody>().velocity;
-
         carObject.transform.position = teleportationDestination.transform.position;
         carObject.transform.rotation = teleportationDestination.transform.rotation;
-        carObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, direction * tempVelocity.z);
+        carObject.GetComponent<Rigidbody>().velocity = teleportationDestination.transform.forward * direction;
     }
 }

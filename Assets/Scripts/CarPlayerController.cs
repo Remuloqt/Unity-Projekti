@@ -60,7 +60,8 @@ namespace UnityStandardAssets.Vehicles.Car
             cameraControllerScript.camera.transform.rotation = playerCarObject.transform.rotation;
 
             // Remove the audio listener from this object because there already is one in the StartAndEndScreenManager
-            Destroy(cameraObject.GetComponent<AudioListener>());
+            //Destroy(cameraObject.GetComponent<AudioListener>());
+            cameraObject.GetComponent<AudioListener>().enabled = false;
 
         }
 
