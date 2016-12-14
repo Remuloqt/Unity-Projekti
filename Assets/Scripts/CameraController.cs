@@ -4,27 +4,26 @@ using UnityEngine;
 public class CameraController : MonoBehaviour 
 {	
 	public float rotateSpeed = 1f, scrollSpeed = 200f;
-    public Camera camera;
 	public Transform pivot;
 	public Vector3 cameraAssign = new Vector3(0,0,0);
-	public SphericalCoordinates sc;
-
+	private SphericalCoordinates sc;
+    
 	private void Start()
 	{
-        if (camera == null)
+        sc = new SphericalCoordinates(transform.position, 3f, 10f, 0f, Mathf.PI * 2f, 0f, Mathf.PI / 2f);
+        Debug.Log("Spherical coordinates created: " + sc);
+        // Initialize position
+        if (pivot == null)
         {
-            sc = new SphericalCoordinates(this.gameObject.transform.Find("CameraPosition").transform.position, 3f, 10f, 0f, Mathf.PI * 2f, 0f, Mathf.PI / 2f);
+            Debug.Log("Pivot is null");
+            return;
         }
-        else
-        {
-            sc = new SphericalCoordinates(camera.transform.position, 3f, 10f, 0f, Mathf.PI * 2f, 0f, Mathf.PI / 2f);
-        }
-		// Initialize position
-        if (pivot == null) return;
-        camera.transform.position = sc.toCartesian + pivot.position;
-	}
+        Debug.Log("Using Pivot:", pivot);
+        Debug.Log("Sc.toCartesian = " + sc.toCartesian);
+        transform.position = sc.toCartesian + pivot.position;
+	}    
 
-	void Update () 
+	private void Update () 
 	{
 		float h, v;
 
@@ -32,12 +31,14 @@ public class CameraController : MonoBehaviour
 		v = Input.GetAxis( "Mouse Y" );
 
         if (pivot == null) return;
-        camera.transform.position = sc.Rotate(-h * rotateSpeed * Time.deltaTime, -v * rotateSpeed * Time.deltaTime).toCartesian + pivot.position;
+        //Debug.Log("Pivot position: " + pivot.position);
+        //Debug.Log("Spherical coordinates: " + sc);
+        transform.position = sc.Rotate(-h * rotateSpeed * Time.deltaTime, -v * rotateSpeed * Time.deltaTime).toCartesian + pivot.position;
 
         float sw = -Input.GetAxis("Mouse ScrollWheel");
         if (sw * sw > Mathf.Epsilon)
-            camera.transform.position = sc.TranslateRadius(sw * Time.deltaTime * scrollSpeed).toCartesian + pivot.position;
+            transform.position = sc.TranslateRadius(sw * Time.deltaTime * scrollSpeed).toCartesian + pivot.position;
 
-        camera.transform.LookAt(pivot.position + cameraAssign);
+        transform.LookAt(pivot.position + cameraAssign);
 	}
 }

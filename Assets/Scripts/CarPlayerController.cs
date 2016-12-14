@@ -14,6 +14,7 @@ namespace UnityStandardAssets.Vehicles.Car
         private CarController m_Car; // the car controller we want to use
 
         public float cameraSpeed = 1f;
+        public Transform cameraPosition;
 
         private GameObject playerSpawnPointsMainObject;
         private List<Transform> playerSpawnPoints;
@@ -31,47 +32,34 @@ namespace UnityStandardAssets.Vehicles.Car
             {
                 playerSpawnPoints.Add(child);
             }
-
             playerSpawnPointArray = playerSpawnPoints.ToArray();
 
-            m_Car = GetComponent<CarController>();
-
-            GameObject playerCarObject = this.gameObject;
-            playerCarObject.AddComponent<CameraController>();
-
-            // create camera object which contains the camera and the cameracontroller script
-            // lastly attach it to the player object
-            cameraObject = new GameObject("PlayerCamera");
-
-            cameraObject.transform.parent = this.gameObject.transform;
-            cameraObject.AddComponent<Camera>();
-            cameraObject.AddComponent<CameraController>();
-
-            // Add an audio listener to the camera
-            cameraObject.AddComponent<AudioListener>();
-
-            CameraController cameraControllerScript = cameraObject.GetComponent<CameraController>();
-            cameraControllerScript.camera = cameraObject.GetComponent<Camera>();
-            cameraControllerScript.pivot = playerCarObject.transform;
-            cameraControllerScript.rotateSpeed = cameraSpeed;
+            GameObject playerCarObject = transform.gameObject;
 
             int randomArrayIndex = Random.Range(0, playerSpawnPointArray.Length);
             playerCarObject.transform.position = playerSpawnPointArray[randomArrayIndex].position;
             playerCarObject.transform.rotation = playerSpawnPointArray[randomArrayIndex].rotation;
-            cameraControllerScript.camera.transform.rotation = playerCarObject.transform.rotation;
 
-            // Remove the audio listener from this object because there already is one in the StartAndEndScreenManager
-            cameraObject.GetComponent<AudioListener>().enabled = false;
+            // create camera object which contains the camera and the cameracontroller script
+            // lastly attach it to the player object
+            cameraObject = new GameObject("PlayerCamera");
+            cameraObject.transform.position = cameraPosition.position;
+            cameraObject.AddComponent<Camera>();
+            cameraObject.AddComponent<CameraController>();
+
+            CameraController cameraControllerScript = cameraObject.GetComponent<CameraController>();
+            cameraControllerScript.rotateSpeed = cameraSpeed;
+            cameraControllerScript.pivot = transform;
+
+            //cameraControllerScript.PseudoStart();
+
+            m_Car = GetComponent<CarController>();
 
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (!isLocalPlayer)
-            {
-                return;
-            }
             // pass the input to the car!
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
