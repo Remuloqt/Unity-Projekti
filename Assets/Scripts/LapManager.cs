@@ -1,29 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class LapManager : MonoBehaviour {
+public class LapManager : NetworkBehaviour {
 
     // Possible way to implement giving player points for completing a lap
     //private PlayerScore playerScoreScript;
 
     private bool newLap = false;
-    private int lapsFinished = 0;
+    public int lapsFinished = 0;
 
     private TextMesh lapTextNumber;
 
 	// Use this for initialization
 	void Start () {
 
+        if (!isLocalPlayer) return;
+
         // Possible way to get the playerScoreScript for the rest of the code
-        GameObject collidersObject = transform.parent.gameObject;
-        GameObject carPlayerObject = collidersObject.transform.parent.gameObject;
+        GameObject carPlayerObject = this.gameObject;
         //playerScoreScript = carPlayerObject.GetComponent<PlayerScoreScript>();
 
         GameObject mapObject = GameObject.Find("GameMap");
         GameObject lapStuffObject = mapObject.transform.Find("LapStuff").gameObject;
-        GameObject lapTextNumberObject = lapStuffObject.transform.Find("LapsDrivenNumberText").gameObject;
+        GameObject lapTextNumberPositionObject = lapStuffObject.transform.Find("LapsDrivenNumberTextPosition").gameObject;
+
+        GameObject lapTextNumberObject = new GameObject("LapsDrivenNumberText");
+        lapTextNumberObject.transform.parent = lapStuffObject.transform;
+        lapTextNumberObject.transform.position = lapTextNumberPositionObject.transform.position;
+        lapTextNumberObject.transform.rotation = lapTextNumberPositionObject.transform.rotation;
+
+        lapTextNumberObject.AddComponent<MeshRenderer>();
+        lapTextNumberObject.AddComponent<TextMesh>();
         lapTextNumber = lapTextNumberObject.GetComponent<TextMesh>();
+
+        lapTextNumber.fontSize = 40;
+        lapTextNumber.text = ""+0;
+
+        Instantiate(lapTextNumberObject);
 	}
 	
 	// Update is called once per frame
@@ -31,21 +46,21 @@ public class LapManager : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter(Collider other)
+    public void LapEndPassed()
     {
-        if(other.gameObject.name == "LapEnd" && newLap)
-        {
-            newLap = false;
+        if (!isLocalPlayer || !newLap) return;
 
-            // Possible way to inform of new lap done
-            //playerScoreScript.OnLapFinished();
-            ++lapsFinished;
-            lapTextNumber.text = "" + lapsFinished;
-        }
+        newLap = false;
+        // Possible way to inform of new lap done
+        //playerScoreScript.OnLapFinished();
+        ++lapsFinished;
+        lapTextNumber.text = "" + lapsFinished;
+    }
 
-        if(other.gameObject.name == "LapStart" && !newLap)
-        {
-            newLap = true;
-        }
+    public void LapStartPassed()
+    {
+        if (!isLocalPlayer || newLap) return;
+
+        newLap = true;
     }
 }

@@ -13,12 +13,11 @@ public class SpeedBoostScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
     void OnTriggerEnter(Collider collider)
     {
-
         GameObject collidersObject = collider.transform.parent.gameObject;
         GameObject carObject = collidersObject.transform.parent.gameObject;
 
