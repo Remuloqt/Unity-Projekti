@@ -617,7 +617,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0.25
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2533,9 +2533,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 317867802}
-  - component: {fileID: 317867803}
   - component: {fileID: 317867805}
   - component: {fileID: 317867804}
+  - component: {fileID: 317867803}
   m_Layer: 0
   m_Name: background
   m_TagString: Untagged
@@ -2565,8 +2565,7 @@ RectTransform:
 --- !u!114 &317867803
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114700578977891246, guid: e54cd630815de6e448a41856881fecb4,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 317867801}
   m_Enabled: 1
@@ -2576,7 +2575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingGifPath: ./Assets/Menus/EndingMenu/gameover.gif
   speed: 0.1
-  drawPosition: {x: 0, y: 115}
+  drawPosition: {x: 400, y: 200}
 --- !u!114 &317867804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3310,6 +3309,69 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3.6576307
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &390980727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 390980729}
+  - component: {fileID: 390980728}
+  m_Layer: 0
+  m_Name: Water4SimpleReflectionEndingMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!20 &390980728
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 390980727}
+  m_Enabled: 0
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967279
+  m_RenderingPath: 1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
+--- !u!4 &390980729
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 390980727}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 913.49, y: 904.38745, z: -733.20917}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &392133362
 GameObject:
   m_ObjectHideFlags: 0
@@ -3736,8 +3798,8 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 460301946}
-  m_LocalRotation: {x: -0.28920916, y: 0.6060719, z: 0.25147954, w: 0.6969885}
-  m_LocalPosition: {x: 99.14664, y: 82.1299, z: 230.24542}
+  m_LocalRotation: {x: -0.10636811, y: 0.7026988, z: 0.10750669, w: 0.6952284}
+  m_LocalPosition: {x: 54.895416, y: 76.83266, z: 269.01395}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1813250379}
@@ -7697,8 +7759,8 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 981463028}
-  m_LocalRotation: {x: -0.28920916, y: 0.6060719, z: 0.25147954, w: 0.6969885}
-  m_LocalPosition: {x: 99.14664, y: 64.38991, z: 230.24542}
+  m_LocalRotation: {x: -0.10636811, y: 0.7026988, z: 0.10750669, w: 0.6952284}
+  m_LocalPosition: {x: 54.895416, y: 59.092667, z: 269.01395}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1813250379}
@@ -15024,6 +15086,69 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1896861474}
   m_Mesh: {fileID: 4300010, guid: 10900ec9ea3fc69459c3f2bb3d09ed70, type: 3}
+--- !u!1 &1899589573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1899589575}
+  - component: {fileID: 1899589574}
+  m_Layer: 0
+  m_Name: Water4Simple (1)ReflectionEndingMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!20 &1899589574
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1899589573}
+  m_Enabled: 0
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967279
+  m_RenderingPath: 1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
+--- !u!4 &1899589575
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1899589573}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 913.49, y: 922.12744, z: -733.20917}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1913474186
 GameObject:
   m_ObjectHideFlags: 0

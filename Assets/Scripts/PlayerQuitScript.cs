@@ -26,7 +26,6 @@ public class PlayerQuitScript : NetworkBehaviour {
             GameObject startAndEndScreenManager = GameObject.Find("StartAndEndScreenManager");
             var startAndEndScreenManagerScript = startAndEndScreenManager.GetComponent<StartAndEndScreenManagerScript>();
             GameObject playerCarObject = transform.gameObject;
-            Network.Disconnect();
             CarPlayerData carPlayerData = playerCarObject.GetComponent<CarPlayerData>();
             startAndEndScreenManagerScript.EndGame(carPlayerData);
         }

@@ -5,16 +5,18 @@ using System.Drawing.Imaging;
 using UnityEngine;
 
 public class Background : MonoBehaviour {
+    
     public string loadingGifPath;
     public double speed = 0.1;
     public Vector2 drawPosition;
-
     List<Texture2D> gifFrames = new List<Texture2D>();
+
     void Awake()
     {
         //loadingGifPath = "C:/Users/t4luha00/Documents/Unity-Projekti-master/Assets/Canvases/gameover.gif";
         var gifImage = Image.FromFile(loadingGifPath);
         var dimension = new FrameDimension(gifImage.FrameDimensionsList[0]);
+
         int frameCount = gifImage.GetFrameCount(dimension);
         for (int i = 0; i < frameCount; i++)
         {
@@ -35,8 +37,7 @@ public class Background : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.DrawTexture(new Rect(drawPosition.x, drawPosition.y, 500, gifFrames[0].height + 25), gifFrames[(int)(Time.frameCount * speed) % gifFrames.Count]);
+        GUI.DrawTexture(new Rect(drawPosition.x, drawPosition.y, 378, gifFrames[0].height), gifFrames[(int)(Time.frameCount * speed) % gifFrames.Count]);
     }//gifFrames[0].width, gifFrames[0].height
-
 
 }
