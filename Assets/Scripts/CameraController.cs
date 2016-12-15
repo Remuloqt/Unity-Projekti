@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     
 	private void Start()
 	{
-        sc = new SphericalCoordinates(transform.position, 3f, 10f, 0f, Mathf.PI * 2f, 0f, Mathf.PI / 2f);
+        sc = new SphericalCoordinates(transform.Find("CarPlayer").transform.position, 3f, 10f, 0f, Mathf.PI * 2f, 0f, Mathf.PI / 2f);
         Debug.Log("Spherical coordinates created: " + sc);
         // Initialize position
         if (pivot == null)
