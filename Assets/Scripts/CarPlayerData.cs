@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CarPlayerData : NetworkBehaviour {
 
-    [SyncVar(hook = "UpdatePlayerNameText")]
+    [SyncVar(hook="UpdatePlayerNameText")]
     public string playerName = "PlayerName";
 
     public bool gameWon = false;
@@ -19,15 +19,28 @@ public class CarPlayerData : NetworkBehaviour {
 
     void Start()
     {
-        if (!isLocalPlayer) return;
-        GameObject startAndEndScreenManager = GameObject.Find("StartAndEndScreenManager");
-        StartAndEndScreenManagerScript startAndEndScreenManagerScript = startAndEndScreenManager.GetComponent<StartAndEndScreenManagerScript>();
-        playerName = startAndEndScreenManagerScript.playerName;
+        UpdatePlayerNameText(playerName);
     }
 
-    void UpdatePlayerNameText(string playerName)
+    public override void OnStartLocalPlayer()
     {
-        textPlayerName.text = playerName;
+        base.OnStartLocalPlayer();
+        GameObject startAndEndScreenManager = GameObject.Find("StartAndEndScreenManager");
+        StartAndEndScreenManagerScript startAndEndScreenManagerScript = startAndEndScreenManager.GetComponent<StartAndEndScreenManagerScript>();
+        string _playerName = startAndEndScreenManagerScript.playerName;
+        CmdSetPlayerName(_playerName);
+    }
+
+    [Command]
+    void CmdSetPlayerName(string name)
+    {
+        playerName = name;
+    }
+
+    void UpdatePlayerNameText(string playerNameInput)
+    {
+        playerName = playerNameInput;
+        textPlayerName.text = playerNameInput;
     }
 
     void UpdateScoreText(int score)

@@ -42,16 +42,11 @@ namespace UnityStandardAssets.Vehicles.Car
 
             // create camera object which contains the camera and the cameracontroller script
             // lastly attach it to the player object
-            cameraObject = new GameObject("PlayerCamera");
+            cameraObject = GameObject.Find("PlayerCamera").gameObject;
             cameraObject.transform.position = cameraPosition.position;
+            cameraObject.transform.rotation = transform.rotation;
+            cameraObject.transform.parent = transform;
             cameraObject.AddComponent<Camera>();
-            cameraObject.AddComponent<CameraController>();
-
-            CameraController cameraControllerScript = cameraObject.GetComponent<CameraController>();
-            cameraControllerScript.rotateSpeed = cameraSpeed;
-            cameraControllerScript.pivot = transform;
-
-            //cameraControllerScript.PseudoStart();
 
             m_Car = GetComponent<CarController>();
 
@@ -60,6 +55,8 @@ namespace UnityStandardAssets.Vehicles.Car
         // Update is called once per frame
         void Update()
         {
+            if (!isLocalPlayer) return;
+
             // pass the input to the car!
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");

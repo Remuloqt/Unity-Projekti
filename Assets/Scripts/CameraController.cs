@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
 	public Vector3 cameraAssign = new Vector3(0,0,0);
 	private SphericalCoordinates sc;
     
-	private void Start()
+	void Start()
 	{
         sc = new SphericalCoordinates(transform.Find("CarPlayer").transform.position, 3f, 10f, 0f, Mathf.PI * 2f, 0f, Mathf.PI / 2f);
         Debug.Log("Spherical coordinates created: " + sc);
@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
         transform.position = sc.toCartesian + pivot.position;
 	}    
 
-	private void Update () 
+	void Update () 
 	{
 		float h, v;
 
