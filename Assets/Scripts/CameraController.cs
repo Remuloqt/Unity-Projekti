@@ -5,12 +5,13 @@ public class CameraController : MonoBehaviour
 {	
 	public float rotateSpeed = 1f, scrollSpeed = 200f;
 	public Transform pivot;
+    public Camera camera;
 	public Vector3 cameraAssign = new Vector3(0,0,0);
 	private SphericalCoordinates sc;
     
 	void Start()
 	{
-        sc = new SphericalCoordinates(transform.Find("CarPlayer").transform.position, 3f, 10f, 0f, Mathf.PI * 2f, 0f, Mathf.PI / 2f);
+        sc = new SphericalCoordinates(camera.transform.position, 3f, 10f, 0f, Mathf.PI * 2f, 0f, Mathf.PI / 2f);
         Debug.Log("Spherical coordinates created: " + sc);
         // Initialize position
         if (pivot == null)

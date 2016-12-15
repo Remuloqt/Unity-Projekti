@@ -20,6 +20,12 @@ namespace UnityStandardAssets.Vehicles.Car
         private List<Transform> playerSpawnPoints;
         private Transform[] playerSpawnPointArray;
 
+        public override void OnStartClient()
+        {
+ 	         base.OnStartClient();
+             Start();
+        }
+
         // Use this for initialization
         void Start()
         {
@@ -42,11 +48,20 @@ namespace UnityStandardAssets.Vehicles.Car
 
             // create camera object which contains the camera and the cameracontroller script
             // lastly attach it to the player object
-            cameraObject = GameObject.Find("PlayerCamera").gameObject;
+            cameraObject = new GameObject("PlayerCamera");
             cameraObject.transform.position = cameraPosition.position;
             cameraObject.transform.rotation = transform.rotation;
             cameraObject.transform.parent = transform;
             cameraObject.AddComponent<Camera>();
+
+            // Old, unsuccessful, Camera Controller Script try
+            /*
+            cameraObject.AddComponent<CameraController>();
+            CameraController cameraControllerScript = cameraObject.GetComponent<CameraController>();
+            cameraControllerScript.camera = cameraObject.GetComponent<Camera>();
+            cameraControllerScript.pivot = playerCarObject.transform;
+            cameraControllerScript.rotateSpeed = cameraSpeed;
+            */
 
             m_Car = GetComponent<CarController>();
 

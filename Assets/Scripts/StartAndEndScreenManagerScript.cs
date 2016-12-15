@@ -41,11 +41,7 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
 
     public void OnButtonQuitClick()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
         Application.Quit();
-#endif
     }
 
     private void HideStartingMenu()
