@@ -31,6 +31,9 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
 	void Start () {
         audioSource = GetComponent<AudioSource>();
 
+        // Forgive me
+        Application.targetFrameRate = 60;
+
         ShowStartingMenu();
 	}
 	
