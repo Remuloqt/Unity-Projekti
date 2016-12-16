@@ -17,6 +17,7 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
     public GameObject startingMenu;
     public GameObject endingMenu;
     public Text endingMenuScoreText;
+    public Text endingMenuWinLossText;
 
     public AudioClip startingMenuMusic;
     public AudioClip gameMusic;
@@ -181,9 +182,12 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
     {
         endingMenu.SetActive(true);
 
+        Debug.Log("Game ended. Player won = " + data.gameWon);
+
         endingMenuScoreText.text = "" + data.playerScore;
 
         audioSource.clip = data.gameWon ? endingVictoryMusic : endingLoserMusic;
+        endingMenuWinLossText.text = data.gameWon ? "won!" : "lost!";
         audioSource.Play();
     }
 

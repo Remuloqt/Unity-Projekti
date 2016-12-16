@@ -11,6 +11,7 @@ public class CarPlayerData : NetworkBehaviour {
     [SyncVar(hook="UpdatePlayerNameText")]
     public string playerName = "PlayerName";
 
+    [SyncVar]
     public bool gameWon = false;
 
     [SyncVar(hook = "UpdateScoreText")]
@@ -64,6 +65,7 @@ public class CarPlayerData : NetworkBehaviour {
     [ClientRpc]
     void RpcEndGame()
     {
+        Debug.Log("RpcEndGame with gameWon state = " + this.gameWon);
         GameObject startAndEndScreenManager = GameObject.Find("StartAndEndScreenManager");
         StartAndEndScreenManagerScript startAndEndScreenManagerScript = startAndEndScreenManager.GetComponent<StartAndEndScreenManagerScript>();
         startAndEndScreenManagerScript.EndGame(this);
@@ -87,6 +89,7 @@ public class CarPlayerData : NetworkBehaviour {
     public void OnPickupPickedUp(int score)
     {
         playerScore += score;
+        GetComponent<Health>().AddHealth(score);
     }
 
 }
