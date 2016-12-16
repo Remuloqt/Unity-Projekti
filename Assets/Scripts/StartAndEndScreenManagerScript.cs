@@ -58,6 +58,7 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
     {
         startingMenu.SetActive(true);
         audioSource.clip = startingMenuMusic;
+        audioSource.volume = 0.25f;
         audioSource.Play();
     }
 
@@ -185,9 +186,10 @@ public class StartAndEndScreenManagerScript : MonoBehaviour {
         Debug.Log("Game ended. Player won = " + data.gameWon);
 
         endingMenuScoreText.text = "" + data.playerScore;
-
-        audioSource.clip = data.gameWon ? endingVictoryMusic : endingLoserMusic;
         endingMenuWinLossText.text = data.gameWon ? "won!" : "lost!";
+
+        audioSource.volume = 0.75f;
+        audioSource.clip = data.gameWon ? endingVictoryMusic : endingLoserMusic;
         audioSource.Play();
     }
 
