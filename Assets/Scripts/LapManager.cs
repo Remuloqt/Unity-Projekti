@@ -41,6 +41,15 @@ public class LapManager : NetworkBehaviour {
 
         Instantiate(lapTextNumberObject);
 	}
+
+    public void RemoveLapsDrivenNumberText()
+    {
+        GameObject mapObject = GameObject.Find("GameMap");
+        GameObject lapStuffObject = mapObject.transform.Find("LapStuff").gameObject;
+        GameObject lapTextNumberObject = lapStuffObject.transform.Find("LapsDrivenNumberText").gameObject;
+
+        Destroy(lapTextNumberObject);
+    }
 	
 	// Update is called once per frame
 	void Update () {
