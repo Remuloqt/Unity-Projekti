@@ -37,7 +37,7 @@ public class Background : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.DrawTexture(new Rect(drawPosition.x, drawPosition.y, 378, gifFrames[0].height), gifFrames[(int)(Time.frameCount * speed) % gifFrames.Count]);
+        GUI.DrawTexture(new Rect(Screen.width / 2 - gifFrames[0].width / 2, Screen.height / 4, 378, gifFrames[0].height), gifFrames[(int)(Time.frameCount * speed) % gifFrames.Count]);
     }//gifFrames[0].width, gifFrames[0].height
 
 }
