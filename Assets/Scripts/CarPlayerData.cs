@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class CarPlayerData : NetworkBehaviour {
 
+    private int lapsFinishedToQuitGame = 1;
+
     [SyncVar(hook="UpdatePlayerNameText")]
     public string playerName = "PlayerName";
 
@@ -13,6 +15,9 @@ public class CarPlayerData : NetworkBehaviour {
 
     [SyncVar(hook = "UpdateScoreText")]
     public int playerScore = 0;
+
+    [SyncVar(hook = "UpdateLapFinished")]
+    public int lapsFinished = 0;
 
     public Text textPlayerScore;
     public Text textPlayerName;
@@ -50,9 +55,33 @@ public class CarPlayerData : NetworkBehaviour {
         carPlayerData.playerScore = score;
     }
 
+    [Command]
+    void CmdCallEndGame()
+    {
+        RpcEndGame();
+    }
+
+    [ClientRpc]
+    void RpcEndGame()
+    {
+        GameObject startAndEndScreenManager = GameObject.Find("StartAndEndScreenManager");
+        StartAndEndScreenManagerScript startAndEndScreenManagerScript = startAndEndScreenManager.GetComponent<StartAndEndScreenManagerScript>();
+        startAndEndScreenManagerScript.EndGame(this);
+    }
+
+    public void UpdateLapFinished(int lapsFinished)
+    {
+        if (lapsFinished == lapsFinishedToQuitGame)
+        {
+            gameWon = true;
+            CmdCallEndGame();
+        }
+    }
+
     public void OnLapFinished(int score)
     {
         playerScore += score;
+        lapsFinished++;
     }
 
     public void OnPickupPickedUp(int score)
