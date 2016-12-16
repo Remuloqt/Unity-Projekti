@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CarPlayerData : NetworkBehaviour {
 
-    private int lapsFinishedToQuitGame = 1;
+    private int lapsFinishedToQuitGame = 5;
 
     [SyncVar(hook="UpdatePlayerNameText")]
     public string playerName = "PlayerName";
