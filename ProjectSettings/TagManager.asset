@@ -9,6 +9,7 @@ TagManager:
   - Fire
   - PickupSpawn
   - PickUp
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -590,7 +590,6 @@ MonoBehaviour:
   inputFieldServerPort: {fileID: 455742074}
   inputfieldPlayerName: {fileID: 1138664148}
   playerName: 
-  gameWon: 0
   startingMenu: {fileID: 2040455487}
   endingMenu: {fileID: 1082675812}
   endingMenuScoreText: {fileID: 140122501}
@@ -3799,8 +3798,8 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 460301946}
-  m_LocalRotation: {x: -0.08702153, y: 0.90682673, z: 0.34169543, w: 0.23094763}
-  m_LocalPosition: {x: 118.83017, y: 91.95601, z: 276.22244}
+  m_LocalRotation: {x: 0.037770882, y: 0.9609685, z: 0.21726467, w: -0.16706005}
+  m_LocalPosition: {x: 234.41324, y: 114.4601, z: 181.41777}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1813250379}
