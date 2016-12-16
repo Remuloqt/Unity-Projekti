@@ -10,13 +10,19 @@ public class PickUpCollisionScript : NetworkBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        GameObject carPlayerObject = null;
+        try
+        {
+            GameObject collidersObject = other.gameObject.transform.parent.gameObject;
+            carPlayerObject = collidersObject.transform.parent.gameObject;
+        }
+        catch
+        {
+            return;
+        }
+        if (carPlayerObject != null && carPlayerObject.tag == "Player")
         {
             Debug.Log("Pickup collected!");
-
-            var colliderObject = other.gameObject;
-            var collidersObject = colliderObject.transform.parent.gameObject;
-            var carPlayerObject = collidersObject.transform.parent.gameObject;
 
             CarPlayerData playerScoreScript = carPlayerObject.GetComponent<CarPlayerData>();
 

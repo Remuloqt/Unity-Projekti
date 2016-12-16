@@ -8,7 +8,7 @@ public class WaterBehaviour : MonoBehaviour {
 	bool isInWater = false;
 	private Transform[] playerSpawnPointArray;
 	private List<Transform> playerSpawnPoints;
-	public int timer = 150;
+	public int timer = 60;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +25,7 @@ public class WaterBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(isInWater){
+		if(isInWater && playerObject != null){
 			playerObject.GetComponent<Rigidbody> ().velocity /= 1.1f;
 			timer -= 1;
 			if (timer < 0) {
@@ -37,20 +37,29 @@ public class WaterBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collider)
-	{
-		if (collider.gameObject.tag != "Player") {
-			return;
-		}
-		GameObject collidersObject = collider.transform.parent.gameObject;
-		GameObject carObject = collidersObject.transform.parent.gameObject;
-		playerObject = carObject;
-		if (playerObject.tag == "Player") {
+    {
+        if (collider.gameObject.tag == "Bullet") return;
+
+        playerObject = null;
+        try
+        {
+            GameObject collidersObject = collider.gameObject.transform.parent.gameObject;
+            playerObject = collidersObject.transform.parent.gameObject;
+        }
+        catch
+        {
+            return;
+        }
+		if (playerObject != null && playerObject.tag == "Player") {
 			isInWater = true;
 		}
 
 	}
 	void OnTriggerExit(Collider collider){
-		isInWater = false;
+        if (playerObject != null)
+        {
+            isInWater = false;
+        }
 	}
 
 	
